@@ -1,31 +1,8 @@
 // ─── Mocked RSVP Actions for Template Previews ─────────────────────────────
 // This file simulates RSVP submissions and event fetches without direct DB access.
 
-export interface InvitationEvent {
-  id: string;
-  name: string;
-  event_date: string | null;
-  event_time: string | null;
-  venue_name: string | null;
-}
+import type { InvitationEvent, RSVPEventEntry, RSVPSubmission } from "@/types/invitation";
 
-export interface RSVPEventEntry {
-  invitation_event_id: string;
-  is_attending: boolean;
-  guest_count: number;
-}
-
-export interface RSVPSubmission {
-  event_id: string;
-  guest_name: string;
-  guest_email?: string;
-  guest_phone?: string;
-  status: "attending" | "not_attending";
-  guest_count: number;
-  dietary_notes?: string;
-  custom_responses?: Record<string, unknown>;
-  event_responses: RSVPEventEntry[];
-}
 
 // Simulated delay helper
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));

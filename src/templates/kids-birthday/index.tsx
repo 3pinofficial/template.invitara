@@ -9,7 +9,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import type { InviteProps } from "@/types/invite-schema";
 import { resolveField } from "@/types/invite-schema";
 import { UniversalRSVPForm, type RSVPThemeConfig, type RSVPFieldConfig } from "@/components/rsvp/UniversalRSVPForm";
-import type { InvitationEvent } from "@/lib/rsvp-actions";
+import type { InvitationEvent } from "@/types/invitation";
 import { Gift, Calendar, Clock, MapPin, Gamepad2, Music, Cake, PartyPopper } from "lucide-react";
 
 // ─── Asset Registry ───────────────────────────────────────────────────────────

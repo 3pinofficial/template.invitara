@@ -5,28 +5,17 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   getInvitationEvents,
   submitRSVP,
-  type InvitationEvent,
-  type RSVPEventEntry,
 } from "@/lib/rsvp-actions";
+import type {
+  InvitationEvent,
+  RSVPThemeConfig,
+  RSVPFieldConfig,
+  RSVPEventEntry,
+} from "@/types/invitation";
+
+export type { RSVPThemeConfig, RSVPFieldConfig };
 
 // ─── Interface Contracts ─────────────────────────────────────────
-
-export interface RSVPThemeConfig {
-  primaryColor: string;
-  textColor: string;
-  backgroundColor: string;
-  fontFamily: string;
-  buttonShape: "rounded-none" | "rounded-md" | "rounded-full";
-}
-
-export interface RSVPFieldConfig {
-  requireEmail: boolean;
-  showPhone: boolean;
-  requirePhone: boolean;
-  showDietary: boolean;
-  showLeaveMessage: boolean;
-  maxGuestsAllowed: number;
-}
 
 export interface UniversalRSVPProps {
   eventId: string;

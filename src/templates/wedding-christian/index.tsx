@@ -9,7 +9,7 @@ import type { InviteProps, UserData, SupportedLanguage } from "@/types/invite-sc
 import { resolveField } from "@/types/invite-schema";
 import { UniversalRSVPForm, type RSVPThemeConfig, type RSVPFieldConfig } from "@/components/rsvp/UniversalRSVPForm";
 import { MomentsSection } from "@/components/invite/MomentsSection";
-import type { InvitationEvent } from "@/lib/rsvp-actions";
+import type { InvitationEvent } from "@/types/invitation";
 import { ChevronDown, Heart, MapPin, Calendar, Clock, Navigation, Compass } from "lucide-react";
 
 // ─── Asset Registry ───────────────────────────────────────────────────────────

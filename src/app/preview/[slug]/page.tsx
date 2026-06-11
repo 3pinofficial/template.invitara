@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useParams, useSearchParams, useRouter } from "next/navigation";
 import { getTemplateComponent, getTemplateDefinition } from "@/lib/registry";
 import type { SupportedLanguage } from "@/types/invite-schema";
+import AuthGuard from "@/components/AuthGuard";
+
 
 export default function PreviewPage() {
   const params = useParams();
@@ -100,76 +102,88 @@ export default function PreviewPage() {
   const enabledAddons = ["rsvp", "moments", "maps"];
 
   return (
-    <div className="min-h-screen bg-[#070b14] flex flex-col">
-      {/* Dynamic Viewport Controller Header */}
-      <header className="sticky top-0 z-50 h-16 bg-[#0d1322]/80 backdrop-blur-md border-b border-white/10 px-6 flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <Link
-            href="/"
-            className="flex items-center gap-1 text-xs text-gray-400 hover:text-white transition-colors py-1.5 px-3 rounded-lg hover:bg-white/5 border border-white/5"
-          >
-            <span>←</span> Back
-          </Link>
-          <div className="hidden sm:block">
-            <h1 className="text-sm font-headline font-bold text-white flex items-center gap-2">
-              <span>{definition?.name || slug}</span>
-              <span className="text-[10px] text-gray-500 font-sans font-normal uppercase bg-white/5 px-2 py-0.5 rounded border border-white/5">
-                Preview
-              </span>
-            </h1>
-          </div>
-        </div>
-
-        {/* Viewport Control */}
-        <div className="flex items-center bg-black/40 border border-white/10 rounded-lg p-0.5 text-xs">
-          <button
-            onClick={() => toggleMode("mobile")}
-            className={`flex items-center gap-1 px-3 py-1.5 rounded-md font-semibold transition-all ${
-              mode === "mobile"
-                ? "bg-[#c5a059] text-black"
-                : "text-gray-400 hover:text-white"
-            }`}
-          >
-            <span>📱</span> Mobile View
-          </button>
-          <button
-            onClick={() => toggleMode("desktop")}
-            className={`flex items-center gap-1 px-3 py-1.5 rounded-md font-semibold transition-all ${
-              mode === "desktop"
-                ? "bg-[#c5a059] text-black"
-                : "text-gray-400 hover:text-white"
-            }`}
-          >
-            <span>💻</span> Desktop View
-          </button>
-        </div>
-
-        {/* Language Selection */}
-        <div className="flex items-center gap-2 text-xs">
-          <label className="text-gray-400 hidden md:inline">Language:</label>
-          <select
-            value={lang}
-            onChange={(e) => setLang(e.target.value as SupportedLanguage)}
-            className="bg-[#131d30] border border-white/10 text-white rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-[#c5a059]"
-          >
-            <option value="en">English</option>
-            <option value="hi">Hindi (हिंदी)</option>
-            <option value="ta">Tamil (தமிழ்)</option>
-          </select>
-        </div>
-      </header>
-
-      {/* Main Workspace Frame */}
-      <main className="flex-1 flex items-center justify-center p-4 md:p-8 overflow-auto">
-        {mode === "mobile" ? (
-          <div className="relative w-[402px] h-[850px] border-[8px] border-[#131d30] rounded-[36px] overflow-hidden shadow-[0_24px_80px_rgba(0,0,0,0.6)] bg-slate-950 flex flex-col">
-            {/* Speaker & Camera Notch */}
-            <div className="absolute top-0 inset-x-0 h-6 bg-black flex items-center justify-center z-[100]">
-              <div className="w-24 h-3.5 bg-[#131d30] rounded-full"></div>
+    <AuthGuard>
+      <div className="min-h-screen bg-[#070b14] flex flex-col">
+        {/* Dynamic Viewport Controller Header */}
+        <header className="sticky top-0 z-50 h-16 bg-[#0d1322]/80 backdrop-blur-md border-b border-white/10 px-6 flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <Link
+              href="/"
+              className="flex items-center gap-1 text-xs text-gray-400 hover:text-white transition-colors py-1.5 px-3 rounded-lg hover:bg-white/5 border border-white/5"
+            >
+              <span>←</span> Back
+            </Link>
+            <div className="hidden sm:block">
+              <h1 className="text-sm font-headline font-bold text-white flex items-center gap-2">
+                <span>{definition?.name || slug}</span>
+                <span className="text-[10px] text-gray-500 font-sans font-normal uppercase bg-white/5 px-2 py-0.5 rounded border border-white/5">
+                  Preview
+                </span>
+              </h1>
             </div>
-            
-            {/* Viewport Content */}
-            <div className="flex-1 overflow-auto pt-6 scrollbar-thin">
+          </div>
+
+          {/* Viewport Control */}
+          <div className="flex items-center bg-black/40 border border-white/10 rounded-lg p-0.5 text-xs">
+            <button
+              onClick={() => toggleMode("mobile")}
+              className={`flex items-center gap-1 px-3 py-1.5 rounded-md font-semibold transition-all ${
+                mode === "mobile"
+                  ? "bg-[#c5a059] text-black"
+                  : "text-gray-400 hover:text-white"
+              }`}
+            >
+              <span>📱</span> Mobile View
+            </button>
+            <button
+              onClick={() => toggleMode("desktop")}
+              className={`flex items-center gap-1 px-3 py-1.5 rounded-md font-semibold transition-all ${
+                mode === "desktop"
+                  ? "bg-[#c5a059] text-black"
+                  : "text-gray-400 hover:text-white"
+              }`}
+            >
+              <span>💻</span> Desktop View
+            </button>
+          </div>
+
+          {/* Language Selection */}
+          <div className="flex items-center gap-2 text-xs">
+            <label className="text-gray-400 hidden md:inline">Language:</label>
+            <select
+              value={lang}
+              onChange={(e) => setLang(e.target.value as SupportedLanguage)}
+              className="bg-[#131d30] border border-white/10 text-white rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-[#c5a059]"
+            >
+              <option value="en">English</option>
+              <option value="hi">Hindi (हिंदी)</option>
+              <option value="ta">Tamil (தமிழ்)</option>
+            </select>
+          </div>
+        </header>
+
+        {/* Main Workspace Frame */}
+        <main className="flex-1 flex items-center justify-center p-4 md:p-8 overflow-auto">
+          {mode === "mobile" ? (
+            <div className="relative w-[402px] h-[850px] border-[8px] border-[#131d30] rounded-[36px] overflow-hidden shadow-[0_24px_80px_rgba(0,0,0,0.6)] bg-slate-950 flex flex-col">
+              {/* Speaker & Camera Notch */}
+              <div className="absolute top-0 inset-x-0 h-6 bg-black flex items-center justify-center z-[100]">
+                <div className="w-24 h-3.5 bg-[#131d30] rounded-full"></div>
+              </div>
+              
+              {/* Viewport Content */}
+              <div className="flex-1 overflow-auto pt-6 scrollbar-thin">
+                <TemplateComponent
+                  userData={mockUserData}
+                  language={lang}
+                  enabledAddons={enabledAddons}
+                  isPreview={false}
+                  eventId="preview-event-uuid"
+                />
+              </div>
+            </div>
+          ) : (
+            <div className="w-full max-w-[1440px] border border-white/10 rounded-2xl overflow-hidden shadow-2xl bg-slate-950">
               <TemplateComponent
                 userData={mockUserData}
                 language={lang}
@@ -178,19 +192,9 @@ export default function PreviewPage() {
                 eventId="preview-event-uuid"
               />
             </div>
-          </div>
-        ) : (
-          <div className="w-full max-w-[1440px] border border-white/10 rounded-2xl overflow-hidden shadow-2xl bg-slate-950">
-            <TemplateComponent
-              userData={mockUserData}
-              language={lang}
-              enabledAddons={enabledAddons}
-              isPreview={false}
-              eventId="preview-event-uuid"
-            />
-          </div>
-        )}
-      </main>
-    </div>
+          )}
+        </main>
+      </div>
+    </AuthGuard>
   );
 }

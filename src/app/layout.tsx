@@ -5,6 +5,10 @@ import { cn } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "Invitara Templates Showcase",
   description: "Beautiful premium digital invitation templates preview.",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default function RootLayout({

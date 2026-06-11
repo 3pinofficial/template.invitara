@@ -35,6 +35,9 @@ export async function proxy(request: NextRequest) {
       },
     });
 
+    const host = request.headers.get("host") || "";
+    const cookieDomain = host.endsWith("invitara.in") ? ".invitara.in" : undefined;
+
     // Initialize Supabase server client
     const supabase = createServerClient(
       supabaseUrl,
@@ -50,9 +53,18 @@ export async function proxy(request: NextRequest) {
               request,
             });
             cookiesToSet.forEach(({ name, value, options }) =>
-              supabaseResponse.cookies.set(name, value, options)
+              supabaseResponse.cookies.set(name, value, {
+                ...options,
+                domain: cookieDomain || options.domain,
+              })
             );
           },
+        },
+        cookieOptions: {
+          domain: cookieDomain,
+          path: "/",
+          sameSite: "lax",
+          secure: process.env.NODE_ENV === "production",
         },
       }
     );

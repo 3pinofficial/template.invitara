@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-headline: var(--font-headline);
+  --font-body: var(--font-body);
+  --font-sans: var(--font-body);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-destructive: var(--destructive);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+}
+
+:root {
+  --font-headline: 'Playfair Display', serif;
+  --font-body: 'Hanken Grotesk', sans-serif;
+  --background: #F9F7F2;
+  --foreground: #131E32;
+  --card: #ffffff;
+  --card-foreground: #131E32;
+  --popover: #ffffff;
+  --popover-foreground: #131E32;
+  --primary: #131E32;
+  --primary-foreground: #ffffff;
+  --secondary: #C5A059;
+  --secondary-foreground: #ffffff;
+  --muted: #f3f4f6;
+  --muted-foreground: #6B7280;
+  --accent: #C5A059;
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --border: rgba(19, 30, 50, 0.1);
+  --input: rgba(19, 30, 50, 0.1);
+  --ring: #C5A059;
+  --radius: 0.75rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    font-size: 16px;
+  }
+}
+
+@layer utilities {
+  .gradient-primary {
+    background: linear-gradient(135deg, #131E32 0%, #1e2f4f 100%);
+  }
+  .gradient-secondary {
+    background: linear-gradient(135deg, #C5A059 0%, #d4b473 100%);
+  }
+  .gradient-text {
+    background: linear-gradient(135deg, #C5A059 0%, #a38241 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .glass-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(19, 30, 50, 0.05);
+  }
+}

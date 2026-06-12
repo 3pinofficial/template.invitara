@@ -4,7 +4,7 @@
 
 import type { TemplateSchemaDefinition } from "@/types/template";
 
-export const weddingElegantSchema: TemplateSchemaDefinition = {
+export const templateConfig: TemplateSchemaDefinition = {
   slug: "wedding-elegant",
   name: "Wedding Elegant",
   category: "Indian Wedding",
@@ -16,6 +16,8 @@ export const weddingElegantSchema: TemplateSchemaDefinition = {
   tier: "royal",
   motionLevel: "cinematic",
   supportedLanguages: ["en"],
+  version: "1.0.0",
+  status: "published",
 
   globalFields: [
     // ── Couple ─────────────────────────────────────────────────────────────
@@ -281,4 +283,79 @@ export const weddingElegantSchema: TemplateSchemaDefinition = {
     { key: "countdown", label: "Countdown Timer", description: "Live countdown to the wedding", plan: "free", default: true  },
     { key: "gallery",   label: "Photo Gallery",  description: "3-photo gallery section",        plan: "free", default: true  },
   ],
+
+  sections: [
+    {
+      id: "hero",
+      type: "hero",
+      label: "Couple Hero",
+      icon: "✨",
+      required: true,
+      pinned: "top",
+      defaultEnabled: true,
+      order: 0,
+      fields: []
+    },
+    {
+      id: "haldi",
+      type: "event-details",
+      label: "Haldi Ceremony",
+      icon: "🌼",
+      required: false,
+      defaultEnabled: true,
+      order: 1,
+      fields: []
+    },
+    {
+      id: "mehendi",
+      type: "event-details",
+      label: "Mehendi Night",
+      icon: "🌿",
+      required: false,
+      defaultEnabled: true,
+      order: 2,
+      fields: []
+    },
+    {
+      id: "wedding",
+      type: "event-details",
+      label: "Wedding Ceremony",
+      icon: "💍",
+      required: true,
+      defaultEnabled: true,
+      order: 3,
+      fields: []
+    },
+    {
+      id: "reception",
+      type: "event-details",
+      label: "Grand Reception",
+      icon: "🎉",
+      required: false,
+      defaultEnabled: true,
+      order: 4,
+      fields: []
+    },
+    {
+      id: "gallery",
+      type: "gallery",
+      label: "Photo Gallery",
+      icon: "📸",
+      required: false,
+      defaultEnabled: true,
+      order: 5,
+      fields: []
+    },
+    {
+      id: "rsvp",
+      type: "rsvp",
+      label: "RSVP Form",
+      icon: "✉️",
+      required: true,
+      pinned: "bottom",
+      defaultEnabled: true,
+      order: 6,
+      fields: []
+    }
+  ]
 };

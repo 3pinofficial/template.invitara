@@ -4,7 +4,7 @@
 
 import type { TemplateSchemaDefinition } from "@/types/template";
 
-export const weddingChristianSchema: TemplateSchemaDefinition = {
+export const templateConfig: TemplateSchemaDefinition = {
   slug: "wedding-christian",
   name: "Wedding Christian",
   category: "Christian Wedding",
@@ -16,6 +16,8 @@ export const weddingChristianSchema: TemplateSchemaDefinition = {
   tier: "premium",
   motionLevel: "cinematic",
   supportedLanguages: ["en"],
+  version: "1.0.0",
+  status: "published",
 
   globalFields: [
     // ── Couple ─────────────────────────────────────────────────────────────
@@ -237,4 +239,59 @@ export const weddingChristianSchema: TemplateSchemaDefinition = {
     { key: "rsvp",      label: "RSVP Form",     description: "Collect RSVPs from guests",      plan: "free", default: true  },
     { key: "maps",      label: "Google Maps",   description: "Embed maps for each venue",      plan: "pro",  default: false },
   ],
+
+  sections: [
+    {
+      id: "hero",
+      type: "hero",
+      label: "Couple Hero",
+      icon: "✨",
+      required: true,
+      pinned: "top",
+      defaultEnabled: true,
+      order: 0,
+      fields: []
+    },
+    {
+      id: "rehearsal",
+      type: "event-details",
+      label: "Rehearsal Dinner",
+      icon: "🍽️",
+      required: false,
+      defaultEnabled: true,
+      order: 1,
+      fields: []
+    },
+    {
+      id: "wedding",
+      type: "event-details",
+      label: "Wedding Ceremony",
+      icon: "⛪",
+      required: true,
+      defaultEnabled: true,
+      order: 2,
+      fields: []
+    },
+    {
+      id: "reception",
+      type: "event-details",
+      label: "Grand Reception",
+      icon: "🥂",
+      required: false,
+      defaultEnabled: true,
+      order: 3,
+      fields: []
+    },
+    {
+      id: "rsvp",
+      type: "rsvp",
+      label: "RSVP Form",
+      icon: "✉️",
+      required: true,
+      pinned: "bottom",
+      defaultEnabled: true,
+      order: 4,
+      fields: []
+    }
+  ]
 };

@@ -51,10 +51,15 @@ export interface TemplateDefinition {
   /** Languages this template ships translations for */
   supportedLanguages: SupportedLanguage[];
 
+  /** Version of the template (semver format) */
+  version: string;
+  /** Lifecycle status of the template */
+  status: "draft" | "preview" | "published" | "deprecated";
+
   globalFields: FieldDefinition[];
   events: EventSchema[];
   addons: AddonDefinition[];
-  sections?: SectionDefinition[];
+  sections: SectionDefinition[];
 
   /** The React component that renders the template */
   component: ComponentType<InviteProps>;

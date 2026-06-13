@@ -4,7 +4,7 @@
 
 import type { TemplateSchemaDefinition } from "@/types/template";
 
-export const kidsBirthdaySchema: TemplateSchemaDefinition = {
+export const templateConfig: TemplateSchemaDefinition = {
   slug: "kids-birthday",
   name: "Kids Birthday",
   category: "Birthday",
@@ -16,6 +16,8 @@ export const kidsBirthdaySchema: TemplateSchemaDefinition = {
   tier: "free",
   motionLevel: "cinematic",
   supportedLanguages: ["en"],
+  version: "1.0.0",
+  status: "published",
 
   globalFields: [
     // ── Birthday Child ───────────────────────────────────────────────────────
@@ -198,4 +200,49 @@ export const kidsBirthdaySchema: TemplateSchemaDefinition = {
     { key: "maps",      label: "Google Maps",   description: "Embed maps for your party location",   plan: "pro",  default: false },
     { key: "countdown", label: "Countdown Timer", description: "Live countdown to the party",        plan: "free", default: true  },
   ],
+
+  sections: [
+    {
+      id: "hero",
+      type: "hero",
+      label: "Birthday Child",
+      icon: "🎉",
+      required: true,
+      pinned: "top",
+      defaultEnabled: true,
+      order: 0,
+      fields: []
+    },
+    {
+      id: "birthday_party",
+      type: "event-details",
+      label: "Birthday Party Details",
+      icon: "🎂",
+      required: true,
+      defaultEnabled: true,
+      order: 1,
+      fields: []
+    },
+    {
+      id: "countdown",
+      type: "intro",
+      label: "Countdown Timer",
+      icon: "⏳",
+      required: false,
+      defaultEnabled: true,
+      order: 2,
+      fields: []
+    },
+    {
+      id: "rsvp",
+      type: "rsvp",
+      label: "RSVP Form",
+      icon: "✉️",
+      required: true,
+      pinned: "bottom",
+      defaultEnabled: true,
+      order: 3,
+      fields: []
+    }
+  ]
 };

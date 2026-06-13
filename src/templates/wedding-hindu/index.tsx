@@ -1321,40 +1321,46 @@ export default function WeddingHindu({ userData, language = "en", enabledAddons 
     previewCeremonies, isPreview, userData, language, contact
   };
 
-  const renderFallingFlowers = () => (
-    <>
-      {fallingFlowers.map((f) => (
-        <div
-          key={f.id}
-          style={{
-            position: "fixed",
-            left: `${f.left}%`,
-            top: -60,
-            width: f.size,
-            height: f.size,
-            pointerEvents: "none",
-            zIndex: 9999,
-            opacity: 0,
-            animation: `fallAndFade ${f.duration}s linear ${f.delay}s forwards`,
-            ...({
-              "--start-rot": `${f.rotation}deg`,
-              "--drift-val": `${f.drift}px`,
-            } as any)
-          }}
-        >
-          <img
-            src={A.lotus}
-            alt=""
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "contain",
-            }}
-          />
-        </div>
-      ))}
-    </>
-  );
+  const renderFallingFlowers = () => {
+    const sizeMultiplier = isMobile ? 1 : 2.5;
+    return (
+      <>
+        {fallingFlowers.map((f) => {
+          const finalSize = f.size * sizeMultiplier;
+          return (
+            <div
+              key={f.id}
+              style={{
+                position: "fixed",
+                left: `${f.left}%`,
+                top: -finalSize - 20,
+                width: finalSize,
+                height: finalSize,
+                pointerEvents: "none",
+                zIndex: 9999,
+                opacity: 0,
+                animation: `fallAndFade ${f.duration}s linear ${f.delay}s forwards`,
+                ...({
+                  "--start-rot": `${f.rotation}deg`,
+                  "--drift-val": `${f.drift}px`,
+                } as any)
+              }}
+            >
+              <img
+                src={A.lotus}
+                alt=""
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "contain",
+                }}
+              />
+            </div>
+          );
+        })}
+      </>
+    );
+  };
 
   if (isMobile) {
     if (isPreview) {

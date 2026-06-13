@@ -4,20 +4,20 @@
 import React from "react";
 import dynamic from "next/dynamic";
 import type { ComponentType } from "react";
-import type { InviteProps } from "@/types/invite-schema";
+import type { InviteProps } from "../types/invite-schema";
 import type {
   TemplateDefinition,
   TemplateSchemaDefinition,
   TemplateTier,
-} from "@/types/template";
-import { TIER_RANK } from "@/types/template";
+} from "../types/template";
+import { TIER_RANK } from "../types/template";
 
 // ─── Schema imports ──────────────────────────────────────────────────────────
-import { weddingElegantSchema } from "@/templates/wedding-elegant/schema";
-import { weddingModernSchema } from "@/templates/wedding-modern/schema";
-import { weddingChristianSchema } from "@/templates/wedding-christian/schema";
-import { kidsBirthdaySchema } from "@/templates/kids-birthday/schema";
-import { weddingHinduSchema } from "@/templates/wedding-hindu/schema";
+import { templateConfig as weddingElegantSchema } from "../templates/wedding-elegant/schema";
+import { templateConfig as weddingModernSchema } from "../templates/wedding-modern/schema";
+import { templateConfig as weddingChristianSchema } from "../templates/wedding-christian/schema";
+import { templateConfig as kidsBirthdaySchema } from "../templates/kids-birthday/schema";
+import { templateConfig as weddingHinduSchema } from "../templates/wedding-hindu/schema";
 
 // ─── Loader ─────────────────────────────────────────────────────────────────
 const TemplateLoader = () => (
@@ -52,27 +52,27 @@ const TemplateLoader = () => (
 
 // ─── Dynamic component imports ──────────────────────────────────────────────
 const WeddingElegantComponent = dynamic(
-  () => import("@/templates/wedding-elegant/index"),
+  () => import("../templates/wedding-elegant/index"),
   { loading: TemplateLoader }
 ) as ComponentType<InviteProps>;
 
 const WeddingModernComponent = dynamic(
-  () => import("@/templates/wedding-modern/index"),
+  () => import("../templates/wedding-modern/index"),
   { loading: TemplateLoader }
 ) as ComponentType<InviteProps>;
 
 const WeddingChristianComponent = dynamic(
-  () => import("@/templates/wedding-christian/index"),
+  () => import("../templates/wedding-christian/index"),
   { loading: TemplateLoader }
 ) as ComponentType<InviteProps>;
 
 const KidsBirthdayComponent = dynamic(
-  () => import("@/templates/kids-birthday/index"),
+  () => import("../templates/kids-birthday/index"),
   { loading: TemplateLoader }
 ) as ComponentType<InviteProps>;
 
 const WeddingHinduComponent = dynamic(
-  () => import("@/templates/wedding-hindu/index"),
+  () => import("../templates/wedding-hindu/index"),
   { loading: TemplateLoader }
 ) as ComponentType<InviteProps>;
 
@@ -85,13 +85,27 @@ const REGISTRY: Record<string, TemplateDefinition> = {
   "wedding-hindu": { ...weddingHinduSchema, component: WeddingHinduComponent },
 };
 
+export const REGISTERED_SLUGS = Object.keys(REGISTRY);
+
 // ─── Lookup helpers ──────────────────────────────────────────────────────────
 export function getTemplateDefinition(slug: string): TemplateDefinition | null {
   return REGISTRY[slug] ?? null;
 }
 
+export function getTemplateBySlug(slug: string): TemplateDefinition | null {
+  return REGISTRY[slug] ?? null;
+}
+
 export function getTemplateComponent(slug: string): ComponentType<InviteProps> | null {
   return REGISTRY[slug]?.component ?? null;
+}
+
+export function getPublishedTemplates(): TemplateDefinition[] {
+  return Object.values(REGISTRY).filter((t) => t.status === "published");
+}
+
+export function getTemplatesByCategory(category: string): TemplateDefinition[] {
+  return Object.values(REGISTRY).filter((t) => t.category === category);
 }
 
 export function getAllTemplates(opts?: {
